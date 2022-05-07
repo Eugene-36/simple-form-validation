@@ -127,6 +127,13 @@ input {
   }
 }
 
+.errorMsg {
+  text-align: center;
+  font-size: 0.7rem;
+  color: red;
+  margin-top: 5px;
+}
+
 /*? Медиа правила  */
 @media screen and (max-width: 320px) {
   .form {

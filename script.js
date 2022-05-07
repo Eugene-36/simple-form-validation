@@ -1,11 +1,41 @@
+const form = document.querySelector('[data-form]');
+const allInputs = Array.from(document.getElementsByTagName('input'));
+
 const userName = document.querySelector('[data-name]');
 const email = document.querySelector('[data-email]');
 const password = document.querySelector('[data-password]');
 const confirmPassword = document.querySelector('[data-confirm-password]');
+const errorMessage = document.querySelector('[data-errorMsg]');
 
-const button = document.querySelector('button');
-button.disabled = true;
+const button = document.querySelector('[data-btn]');
+// По умолчанию  кнопку отправки делаем disabled
+// button.disabled = true;
 
+// Генерирует ошибки для валидации
+const generateError = function (text) {
+  let errors = form.querySelectorAll('.errorMsg');
+
+  for (var i = 0; i < errors.length; i++) {
+    errors[i].remove();
+  }
+
+  const error = document.createElement('div');
+  error.className = 'errorMsg';
+  error.style.color = 'red';
+  error.innerHTML = text;
+  return error;
+};
+//Удаление кастомных ошибок
+const removeValidation = function (params) {
+  const errors = form.querySelectorAll('.errorMsg');
+  errors.length = 1;
+  for (let i = 0; i < errors.length; i++) {
+    // console.log('errors[i]', errors[i]);
+    errors[i].remove();
+  }
+};
+
+//Базовая валидация полей
 function checkingFields(userName, email, password, confirmPassword) {
   let validName = /^[a-zA-Z]+$/;
   let validEmail =
@@ -14,12 +44,14 @@ function checkingFields(userName, email, password, confirmPassword) {
   let validConfirmPassword;
 
   userName.onblur = function () {
-    console.log('check', validName.test('somethingELSE'));
-
     if (validName.test(this.value)) {
+      removeValidation();
       this.classList.add('valid');
       this.classList.remove('invalid');
     } else {
+      const error = generateError('Only english letters are required');
+      userName.parentNode.insertBefore(error, userName.nextSibling);
+
       this.classList.add('invalid');
       this.classList.remove('valid');
     }
@@ -29,11 +61,18 @@ function checkingFields(userName, email, password, confirmPassword) {
     // console.log('check', validEmail.test('somethingELSE'));
 
     if (validEmail.test(this.value)) {
+      removeValidation();
+
       this.classList.add('valid');
       this.classList.remove('invalid');
 
       // email.focus();
     } else {
+      const error = generateError(
+        'Email must be as follow example: exampel@s.com'
+      );
+      email.parentNode.insertBefore(error, email.nextSibling);
+
       this.classList.add('invalid');
       this.classList.remove('valid');
     }
@@ -42,12 +81,19 @@ function checkingFields(userName, email, password, confirmPassword) {
   password.onblur = function () {
     console.log('check', this.value);
 
+    removeValidation();
+
     if (validPassword.test(this.value)) {
       this.classList.add('valid');
       this.classList.remove('invalid');
 
       // email.focus();
     } else {
+      const error = generateError(
+        'Password has to be between 8-12 digits. <br/> There should be one uppercase and lowercase letter'
+      );
+      password.parentNode.insertBefore(error, password.nextSibling);
+
       this.classList.add('invalid');
       this.classList.remove('valid');
     }
@@ -57,21 +103,40 @@ function checkingFields(userName, email, password, confirmPassword) {
     console.log('check', this.value);
 
     if (validPassword.test(this.value) && this.value === password.value) {
+      removeValidation();
+
       this.classList.add('valid');
       this.classList.remove('invalid');
 
       // email.focus();
     } else {
+      const error = generateError('Passwords should match');
+      confirmPassword.parentNode.insertBefore(
+        error,
+        confirmPassword.nextSibling
+      );
+
       this.classList.add('invalid');
       this.classList.remove('valid');
     }
   };
 }
-
 checkingFields(userName, email, password, confirmPassword);
 
-button.addEventListener('submit', (e) => {
-  allElm.forEach((item) => {
-    console.log('item', item.style.border);
+console.log('allInputs', allInputs);
+
+button.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  console.log('click was');
+  allInputs.forEach((item) => {
+    if (item.classList.contains('invalid') || item.value === '') {
+      button.setAttribute('disabled', true);
+      console.log("проверка",item.classList.contains('invalid'));
+    } else {
+      button.removeAttribute('disabled');
+      // button.disabled = false;
+      console.log('УРА, вся валидация прошла');
+    }
   });
 });

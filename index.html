@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <form action="" class="form">
+      <form action="" class="form" data-form>
         <ul class="list">
           <li>
             <label for="name">Name: </label>
@@ -36,24 +36,23 @@
             <input
               type="password"
               id="password"
-              pattern="[0-9]{8,12}"
               placeholder="Enter the Password"
               data-password
             />
           </li>
+          <div class="errorMsg" data-errorMsg></div>
           <li>
             <label for="confirm-password">Confirm_Password: </label>
             <input
               type="password"
               id="confirm-password"
-              pattern="[0-9]{8,12}"
               placeholder="Confirm password"
               data-confirm-password
             />
           </li>
         </ul>
         <div class="btn-wrapper">
-          <button type="submit" class="btn">Send data</button>
+          <button type="submit" class="btn" data-btn>Send data</button>
         </div>
       </form>
     </div>
