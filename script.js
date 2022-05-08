@@ -140,20 +140,6 @@ function checkingFields(userName, email, password, confirmPassword) {
       button.disabled = true;
     }
   };
-  //shead-btn
-  if (
-    !userName.classList.contains('invalid') &&
-    !email.classList.contains('invalid') &&
-    !password.classList.contains('invalid') &&
-    !confirmPassword.classList.contains('invalid') &&
-    userName.value !== '' &&
-    email.value !== '' &&
-    password.value !== '' &&
-    confirmPassword.value !== ''
-  ) {
-    console.log('попал в чек');
-    button.classList.remove('shead-btn');
-  }
 }
 checkingFields(userName, email, password, confirmPassword);
 
