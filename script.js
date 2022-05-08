@@ -48,12 +48,18 @@ function checkingFields(userName, email, password, confirmPassword) {
       removeValidation();
       this.classList.add('valid');
       this.classList.remove('invalid');
+
+      //Если инпут  валидный тогда удаляем disabled на кнопку send
+      button.disabled = false;
     } else {
       const error = generateError('Only english letters are required');
       userName.parentNode.insertBefore(error, userName.nextSibling);
 
       this.classList.add('invalid');
       this.classList.remove('valid');
+
+      //Если инпут не валидный тогда добавля disabled на кнопку send
+      button.disabled = true;
     }
   };
 
@@ -66,6 +72,8 @@ function checkingFields(userName, email, password, confirmPassword) {
       this.classList.add('valid');
       this.classList.remove('invalid');
 
+      //Если инпут  валидный тогда удаляем disabled на кнопку send
+      button.disabled = false;
       // email.focus();
     } else {
       const error = generateError(
@@ -75,6 +83,9 @@ function checkingFields(userName, email, password, confirmPassword) {
 
       this.classList.add('invalid');
       this.classList.remove('valid');
+
+      //Если инпут не валидный тогда добавля disabled на кнопку send
+      button.disabled = true;
     }
   };
 
@@ -87,6 +98,8 @@ function checkingFields(userName, email, password, confirmPassword) {
       this.classList.add('valid');
       this.classList.remove('invalid');
 
+      //Если инпут  валидный тогда удаляем disabled на кнопку send
+      button.disabled = false;
       // email.focus();
     } else {
       const error = generateError(
@@ -96,6 +109,8 @@ function checkingFields(userName, email, password, confirmPassword) {
 
       this.classList.add('invalid');
       this.classList.remove('valid');
+      //Если инпут не валидный тогда добавля disabled на кнопку send
+      button.disabled = true;
     }
   };
 
@@ -108,6 +123,8 @@ function checkingFields(userName, email, password, confirmPassword) {
       this.classList.add('valid');
       this.classList.remove('invalid');
 
+      //Если инпут  валидный тогда удаляем disabled на кнопку send
+      button.disabled = false;
       // email.focus();
     } else {
       const error = generateError('Passwords should match');
@@ -118,25 +135,42 @@ function checkingFields(userName, email, password, confirmPassword) {
 
       this.classList.add('invalid');
       this.classList.remove('valid');
+
+      //Если инпут не валидный тогда добавля disabled на кнопку send
+      button.disabled = true;
     }
   };
+  //shead-btn
+  if (
+    !userName.classList.contains('invalid') &&
+    !email.classList.contains('invalid') &&
+    !password.classList.contains('invalid') &&
+    !confirmPassword.classList.contains('invalid') &&
+    userName.value !== '' &&
+    email.value !== '' &&
+    password.value !== '' &&
+    confirmPassword.value !== ''
+  ) {
+    console.log('попал в чек');
+    button.classList.remove('shead-btn');
+  }
 }
 checkingFields(userName, email, password, confirmPassword);
 
-console.log('allInputs', allInputs);
+// console.log('allInputs', allInputs);
 
-button.addEventListener('click', (e) => {
+function finalCheck(e) {
   e.preventDefault();
 
-  console.log('click was');
   allInputs.forEach((item) => {
-    if (item.classList.contains('invalid') || item.value === '') {
-      button.setAttribute('disabled', true);
-      console.log("проверка",item.classList.contains('invalid'));
-    } else {
-      button.removeAttribute('disabled');
-      // button.disabled = false;
+    if (!item.classList.contains('invalid') && form.checkValidity()) {
+      button.classList.remove('shead-btn');
       console.log('УРА, вся валидация прошла');
+    } else {
+      console.log('зашёл в этот блок');
+      button.setAttribute('disabled', 'disabled');
     }
   });
-});
+}
+
+button.addEventListener('click', finalCheck);

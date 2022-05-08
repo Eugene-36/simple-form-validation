@@ -19,6 +19,7 @@
               pattern="[a-z]*"
               placeholder="Enter the First Name"
               data-name
+              required
             />
           </li>
           <li>
@@ -29,6 +30,7 @@
               pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
               placeholder="Enter the Email"
               data-email
+              required
             />
           </li>
           <li>
@@ -38,6 +40,7 @@
               id="password"
               placeholder="Enter the Password"
               data-password
+              required
             />
           </li>
           <div class="errorMsg" data-errorMsg></div>
@@ -48,15 +51,18 @@
               id="confirm-password"
               placeholder="Confirm password"
               data-confirm-password
+              required
             />
           </li>
         </ul>
         <div class="btn-wrapper">
-          <button type="submit" class="btn" data-btn>Send data</button>
+          <button type="submit" class="btn shead-btn" data-btn>
+            Send data
+          </button>
         </div>
       </form>
     </div>
-
+    <!-- <script src="./nodeElements.js" type="module"></script> -->
     <script src="script.js"></script>
   </body>
 </html>

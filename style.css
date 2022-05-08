@@ -133,6 +133,9 @@ input {
   color: red;
   margin-top: 5px;
 }
+.shead-btn {
+  opacity: 0.5;
+}
 
 /*? Медиа правила  */
 @media screen and (max-width: 320px) {
