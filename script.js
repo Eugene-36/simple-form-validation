@@ -1,4 +1,5 @@
 const form = document.querySelector('[data-form]');
+const secondForm = document.querySelector('[data-second-from]');
 const allInputs = Array.from(document.getElementsByTagName('input'));
 
 const userName = document.querySelector('[data-name]');
@@ -10,6 +11,7 @@ const errorMessage = document.querySelector('[data-errorMsg]');
 const button = document.querySelector('[data-btn]');
 // По умолчанию  кнопку отправки делаем disabled
 // button.disabled = true;
+// console.log('second-form', secondForm);
 
 // Генерирует ошибки для валидации
 const generateError = function (text) {
@@ -28,7 +30,7 @@ const generateError = function (text) {
 //Удаление кастомных ошибок
 const removeValidation = function (params) {
   const errors = form.querySelectorAll('.errorMsg');
-  errors.length = 1;
+  // errors.length = 1;
   for (let i = 0; i < errors.length; i++) {
     // console.log('errors[i]', errors[i]);
     errors[i].remove();
@@ -41,7 +43,6 @@ function checkingFields(userName, email, password, confirmPassword) {
   let validEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let validPassword = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,12})$/;
-  let validConfirmPassword;
 
   userName.onblur = function () {
     if (validName.test(this.value)) {
@@ -151,6 +152,8 @@ function finalCheck(e) {
   allInputs.forEach((item) => {
     if (!item.classList.contains('invalid') && form.checkValidity()) {
       button.classList.remove('shead-btn');
+      form.classList.add('moving-first-form');
+      secondForm.classList.add('second');
       console.log('УРА, вся валидация прошла');
     } else {
       console.log('зашёл в этот блок');

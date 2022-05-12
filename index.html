@@ -9,60 +9,123 @@
   </head>
   <body>
     <div id="app">
-      <form action="" class="form" data-form>
-        <ul class="list">
-          <li>
-            <label for="name">Name: </label>
-            <input
-              type="text"
-              id="name"
-              pattern="[a-z]*"
-              placeholder="Enter the First Name"
-              data-name
-              required
-            />
-          </li>
-          <li>
-            <label for="email">Email: </label>
-            <input
-              type="email"
-              id="email"
-              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-              placeholder="Enter the Email"
-              data-email
-              required
-            />
-          </li>
-          <li>
-            <label for="password">Password: </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter the Password"
-              data-password
-              required
-            />
-          </li>
-          <div class="errorMsg" data-errorMsg></div>
-          <li>
-            <label for="confirm-password">Confirm_Password: </label>
-            <input
-              type="password"
-              id="confirm-password"
-              placeholder="Confirm password"
-              data-confirm-password
-              required
-            />
-          </li>
-        </ul>
-        <div class="btn-wrapper">
-          <button type="submit" class="btn shead-btn" data-btn>
-            Send data
-          </button>
+      <form action="" class="form" id="first-form" data-form>
+        <div class="first-form">
+          <ul class="list initial-form">
+            <li>
+              <label for="name">Name: </label>
+              <input
+                type="text"
+                id="name"
+                pattern="[a-z]*"
+                placeholder="Enter the First Name"
+                data-name
+                required
+              />
+            </li>
+            <li>
+              <label for="email">Email: </label>
+              <input
+                type="email"
+                id="email"
+                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                placeholder="Enter the Email"
+                data-email
+                required
+              />
+            </li>
+            <li>
+              <label for="password">Password: </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter the Password"
+                data-password
+                required
+              />
+            </li>
+            <div class="errorMsg" data-errorMsg></div>
+            <li>
+              <label for="confirm-password">Confirm_Password: </label>
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm password"
+                data-confirm-password
+                required
+              />
+            </li>
+          </ul>
+          <div class="btn-wrapper">
+            <button type="submit" class="btn shead-btn" data-btn>
+              Next step
+            </button>
+          </div>
         </div>
       </form>
+
+      <!-- Вторая форма  -->
+      <form
+        action=""
+        class="second-from-hide"
+        id="second-form"
+        data-second-from
+      >
+        <!--==== Вторая форма с валидацией ==== -->
+        <div data-second-form>
+          <ul class="list style-sc-form">
+            <li class="checkbox-position">
+              <label for="checkbox" class="common-text">
+                <p>Tick checkbox:</p>
+                <input type="checkbox" id="checkbox" />
+                <span class="custom-switcher" for="checkbox">
+                  <i>
+                    <div class="eyes-switcher"></div>
+                    <div class="eyes-switcher"></div>
+                  </i> </span
+              ></label>
+            </li>
+            <li>
+              <label for="skills" class="common-text"
+                >Select your superpower:
+              </label>
+              <div class="select">
+                <select
+                  name="skills"
+                  id="skills"
+                  disabled
+                  data-make-choose
+                ></select>
+                <span class="focus"></span>
+              </div>
+            </li>
+
+            <li>
+              <label for="hero" class="common-text">Select your Hero: </label>
+              <div class="select">
+                <select
+                  name="hero"
+                  id="hero"
+                  disabled
+                  data-make-choose
+                ></select>
+                <span class="focus"></span>
+              </div>
+            </li>
+          </ul>
+          <div class="btn-wrapper">
+            <button type="submit" class="btn shead-btn" data-btn-second>
+              Next step
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Третья форма -->
+      <!-- <form action="" id="third-form"></form> -->
     </div>
     <!-- <script src="./nodeElements.js" type="module"></script> -->
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
+    <script src="second-form.js" type="module"></script>
   </body>
 </html>
