@@ -36,16 +36,19 @@ body {
   border: 1px solid;
   padding: 30px;
   box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
-  z-index: 1;
+  z-index: 2;
 
   /*! Это потом нужно будет удалить  */
   /* display: none; */
 }
 
 .moving-first-form {
-  z-index: 0;
-
   animation: form-move 2s forwards;
+}
+.moving-second-form {
+  z-index: 1;
+
+  animation: form-move-second 2s forwards;
 }
 
 #app {
@@ -175,7 +178,7 @@ input {
   opacity: 0;
 }
 .second {
-  z-index: 0;
+  z-index: 1;
   animation: appear-second-from 2s forwards;
 }
 .style-sc-form > li {
@@ -191,6 +194,29 @@ input {
   margin-bottom: 10px;
 }
 
+/* Стили для третьей формы  */
+
+#third-form {
+  position: absolute;
+  /* top: 50%; 
+  left: 50%;  */
+  box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
+  padding: 0.8rem;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.third-from-hide {
+  position: absolute;
+  box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
+  padding: 1.5rem;
+  height: 350px;
+  /*! Это потому нужно будет раскомментить  */
+  opacity: 0;
+}
+.third {
+  z-index: 0;
+  animation: appear-third-from 2s forwards;
+}
 /* Стили для чекбокса */
 #checkbox {
   /*скрыть чекбокс*/
@@ -338,6 +364,9 @@ select:focus + .focus {
 .select {
   position: relative;
 }
+.comment-section {
+  padding: 15px;
+}
 /*? Медиа правила  */
 @media screen and (max-width: 320px) {
   .form {
@@ -385,11 +414,23 @@ select:focus + .focus {
   }
   100% {
     opacity: 0;
-    transform: translateX(-300px);
+    transform: translateX(-345px);
     pointer-events: none;
   }
 }
 
+@keyframes form-move-second {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-345px);
+    pointer-events: none;
+  }
+}
 @keyframes appear-second-from {
   0% {
     opacity: 0;
@@ -403,8 +444,17 @@ select:focus + .focus {
   }
 }
 
-/* margin-bottom: 15px;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-flow: row; */
+@keyframes appear-third-from {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+  }
+}
+
+/* appear-third-from */

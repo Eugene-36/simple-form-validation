@@ -44,7 +44,6 @@
                 required
               />
             </li>
-            <div class="errorMsg" data-errorMsg></div>
             <li>
               <label for="confirm-password">Confirm_Password: </label>
               <input
@@ -114,7 +113,7 @@
             </li>
           </ul>
           <div class="btn-wrapper">
-            <button type="submit" class="btn shead-btn" data-btn-second>
+            <button type="submit" class="btn shead-btn" data-btn-second="2">
               Next step
             </button>
           </div>
@@ -122,10 +121,43 @@
       </form>
 
       <!-- Третья форма -->
-      <!-- <form action="" id="third-form"></form> -->
+      <form action="" class="third-from-hide" id="third-form" data-third-form>
+        <div class="first-form">
+          <ul class="list initial-form">
+            <li>
+              <label for="phone-number">Phone number: </label>
+              <input
+                type="number"
+                id="phone-number"
+                placeholder="Enter your phone number"
+                data-number
+                required
+              />
+            </li>
+            <li>
+              <label for="comments">Leave your comments: </label>
+              <textarea
+                class="comment-section"
+                rows="10"
+                cols="45"
+                name="text"
+                placeholder="Leave your comment below"
+              ></textarea>
+            </li>
+          </ul>
+          <div class="errorMsg" data-errorMsg></div>
+          <div class="btn-wrapper">
+            <button type="submit" class="btn shead-btn" data-btn-third="3">
+              Send all data
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
     <!-- <script src="./nodeElements.js" type="module"></script> -->
+    <script src="removeValidation.js" type="module"></script>
     <script src="script.js" type="module"></script>
     <script src="second-form.js" type="module"></script>
+    <script src="third-form.js" type="module"></script>
   </body>
 </html>

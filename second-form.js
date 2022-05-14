@@ -1,5 +1,7 @@
 import { heroes, languages } from './db.js';
 
+const form = document.querySelector('[data-second-from]');
+const thirdForm = document.querySelector('[data-third-form]');
 const checkbox = document.getElementById('checkbox');
 const makeChoose = Array.from(document.querySelectorAll('[data-make-choose]'));
 const nextStepBtn = document.querySelector('[ data-btn-second]');
@@ -34,4 +36,15 @@ heroes.map((item) => {
   getSecondSelect.insertAdjacentHTML('beforeEnd', singleElemtn);
 });
 
-//По клику на кнопку переходим на следующую форму 
+//По клику на кнопку переходим на следующую форму
+nextStepBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const getDataSetBtnCondition = e.target.dataset.btnSecond === '2';
+
+  if (getDataSetBtnCondition) {
+    form.classList.remove('second');
+    nextStepBtn.classList.remove('shead-btn');
+    form.classList.add('moving-second-form');
+    thirdForm.classList.add('third');
+  }
+});

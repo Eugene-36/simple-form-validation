@@ -1,4 +1,5 @@
 export let heroes = [
+  'Thanos',
   'Iron Man',
   'The Hulk',
   'Doctor Strange',
