@@ -1,10 +1,8 @@
-import { removeValidation, generateError } from './removeValidation.js';
-
 const form = document.querySelector('[data-form]');
 
 const secondForm = document.querySelector('[data-second-from]');
-const allInputs = Array.from(document.getElementsByTagName('input'));
 
+//! Все поля и кнопка
 const userName = document.querySelector('[data-name]');
 const email = document.querySelector('[data-email]');
 const password = document.querySelector('[data-password]');
@@ -12,140 +10,213 @@ const confirmPassword = document.querySelector('[data-confirm-password]');
 
 const button = document.querySelector('[data-btn]');
 
-//Базовая валидация полей
-function checkingFields(userName, email, password, confirmPassword) {
-  let validName = /^[a-zA-Z]+$/;
-  let validEmail =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  let validPassword = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,12})$/;
+//! Новая версия валидации формы
 
-  userName.onblur = function () {
-    if (validName.test(this.value)) {
-      removeValidation(form);
-      this.classList.add('valid');
-      this.classList.remove('invalid');
+//? Функции хэлперы
 
-      //Если инпут  валидный тогда удаляем disabled на кнопку send
-      button.disabled = false;
-    } else {
-      const error = generateError('Only english letters are required', form);
-      userName.parentNode.insertBefore(error, userName.nextSibling);
+let userData = {
+  name: '',
+  email: '',
+};
 
-      this.classList.add('invalid');
-      this.classList.remove('valid');
+export const isRequired = (value) => (value === '' ? false : true);
+const isBetween = (length, min, max) =>
+  length < min || length > max ? false : true;
 
-      //Если инпут не валидный тогда добавля disabled на кнопку send
-      button.disabled = true;
-    }
-  };
+const isEmailValid = (email) => {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+};
 
-  email.onblur = function () {
-    // console.log('check', validEmail.test('somethingELSE'));
+const isPasswordSecure = (password) => {
+  const re = new RegExp(
+    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+  );
+  return re.test(password);
+};
 
-    if (validEmail.test(this.value)) {
-      removeValidation(form);
+//? Функция для показа ошибок и перекраска бордера
+export const showError = (input, message) => {
+  // Получаем поле
+  const formField = input;
+  // добавляем класс ошибки
+  formField.classList.remove('valid');
+  formField.classList.add('invalid');
 
-      this.classList.add('valid');
-      this.classList.remove('invalid');
+  // показываем ошибку
+  const error = formField.parentNode.querySelector('small');
+  error.textContent = message;
+  error.classList.add('errorMsgStyle');
+};
 
-      //Если инпут  валидный тогда удаляем disabled на кнопку send
-      button.disabled = false;
-      // email.focus();
-    } else {
-      const error = generateError(
-        'Email must be as follow example: exampel@s.com',
-        form
-      );
-      email.parentNode.insertBefore(error, email.nextSibling);
+//? Показывает успех
+export const showSuccess = (input) => {
+  // get the form-field element
+  const formField = input;
 
-      this.classList.add('invalid');
-      this.classList.remove('valid');
+  // remove the error class
+  formField.classList.remove('invalid');
+  formField.classList.add('valid');
 
-      //Если инпут не валидный тогда добавля disabled на кнопку send
-      button.disabled = true;
-    }
-  };
+  // hide the error message
+  const error = formField.parentNode.querySelector('small');
+  error.textContent = '';
+};
 
-  password.onblur = function () {
-    console.log('check', this.value);
+//? Валидируем юзера
+const checkUserName = () => {
+  let valid = false;
+  const min = 3,
+    max = 25;
 
-    removeValidation(form);
+  const username = userName.value.trim();
 
-    if (validPassword.test(this.value)) {
-      this.classList.add('valid');
-      this.classList.remove('invalid');
+  if (!isRequired(username)) {
+    showError(userName, 'Username cannot be blank.');
+  } else if (!isBetween(username.length, min, max)) {
+    showError(
+      userName,
+      `Username must be between ${min} and ${max} characters`
+    );
+  } else {
+    showSuccess(userName);
+    valid = true;
+    userData.name = username;
+  }
 
-      //Если инпут  валидный тогда удаляем disabled на кнопку send
-      button.disabled = false;
-      // email.focus();
-    } else {
-      const error = generateError(
-        'Password has to be between 8-12 digits. <br/> There should be one uppercase and lowercase letter',
-        form
-      );
-      password.parentNode.insertBefore(error, password.nextSibling);
+  return valid;
+};
 
-      this.classList.add('invalid');
-      this.classList.remove('valid');
-      //Если инпут не валидный тогда добавля disabled на кнопку send
-      button.disabled = true;
-    }
-  };
+//? Валидируем мэйл
+const checkEmail = () => {
+  let valid = false;
+  const emailEl = email.value.trim();
 
-  confirmPassword.onblur = function () {
-    console.log('check', this.value);
+  if (!isRequired(emailEl)) {
+    showError(email, 'Email cannot be blank');
+  } else if (!isEmailValid(emailEl)) {
+    showError(email, 'Email is not valid');
+  } else {
+    showSuccess(email);
+    valid = true;
+    userData.email = emailEl;
+  }
 
-    if (
-      validPassword.test(this.value) &&
-      confirmPassword.value === password.value
-    ) {
-      removeValidation(form);
+  return valid;
+};
 
-      this.classList.add('valid');
-      this.classList.remove('invalid');
+//? Валидируем пароль
 
-      //Если инпут  валидный тогда удаляем disabled на кнопку send
-      button.disabled = false;
-      // email.focus();
-    } else {
-      const error = generateError('Passwords should match', form);
-      confirmPassword.parentNode.insertBefore(
-        error,
-        confirmPassword.nextSibling
-      );
+const checkPassword = () => {
+  let valid = false;
 
-      this.classList.add('invalid');
-      this.classList.remove('valid');
+  const passwordEL = password.value.trim();
 
-      //Если инпут не валидный тогда добавля disabled на кнопку send
-      button.disabled = true;
-    }
-  };
-}
-checkingFields(userName, email, password, confirmPassword);
+  if (!isRequired(passwordEL)) {
+    showError(password, 'Email cannot be blank');
+  } else if (!isPasswordSecure(passwordEL)) {
+    showError(
+      password,
+      'Password must has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number, and 1 special character in (!@#$%^&*)'
+    );
+  } else {
+    showSuccess(password);
+    valid = true;
+  }
 
-// console.log('allInputs', allInputs);
+  return valid;
+};
 
-function finalCheck(e) {
+//? Валидируем поддтверждение пароля
+const checkConfirmPassword = () => {
+  let valid = false;
+
+  const confirmPasswordUser = confirmPassword.value.trim();
+  const passwordEL = password.value.trim();
+
+  if (!isRequired(confirmPasswordUser)) {
+    showError(confirmPassword, 'Please enter the password again');
+  } else if (passwordEL !== confirmPasswordUser) {
+    showError(confirmPassword, 'Confirm password does not match');
+  } else {
+    showSuccess(confirmPassword);
+    valid = true;
+  }
+
+  return valid;
+};
+
+form.addEventListener('submit', function (e) {
+  // prevent the form from submitting
   e.preventDefault();
 
-  allInputs.forEach((item) => {
-    console.log('item', item.value);
-    if (
-      !item.classList.contains('invalid') &&
-      item.classList.contains('valid') &&
-      form.checkValidity() &&
-      item.value !== ''
-    ) {
-      button.classList.remove('shead-btn');
-      form.classList.add('moving-first-form');
-      secondForm.classList.add('second');
-      console.log('УРА, вся валидация прошла');
-    } else {
-      console.log('зашёл в этот блок');
-      button.setAttribute('disabled', 'disabled');
-    }
-  });
-}
+  // validate form
+  let isUsernameValid = checkUserName(),
+    isEmailValid = checkEmail(),
+    isPasswordValid = checkPassword(),
+    isConfirmPasswordValid = checkConfirmPassword();
 
-button.addEventListener('click', finalCheck);
+  console.log('isUsernameValid', isUsernameValid);
+  console.log('isEmailValid', isEmailValid);
+  console.log('isPasswordValid', isPasswordValid);
+  console.log('isConfirmPasswordValid', isConfirmPasswordValid);
+
+  let isFormValid =
+    isUsernameValid &&
+    isEmailValid &&
+    isPasswordValid &&
+    isConfirmPasswordValid;
+
+  //submit to the server is the form valid
+  if (isFormValid) {
+    button.classList.remove('shead-btn');
+    form.classList.add('moving-first-form');
+    secondForm.classList.add('second');
+    //Тут запишу мой объект в локал
+    console.log('Вся валидация прошла успешно');
+    console.log('userData', userData);
+  }
+});
+
+//? Debounce делать задержки когда юзер вводит данные
+
+export const debounce = (fn, delay = 500) => {
+  let timeoutId;
+
+  return (...args) => {
+    //Удаляем предыдущий таймер
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    //создаём новый таймер
+    timeoutId = setTimeout(() => {
+      fn.apply(null, args);
+    }, delay);
+  };
+};
+
+form.addEventListener(
+  'input',
+  debounce((e) => {
+    switch (e.target.id) {
+      case 'username':
+        checkUserName();
+        break;
+
+      case 'email':
+        checkEmail();
+        break;
+
+      case 'password':
+        checkPassword();
+        break;
+
+      case 'confirm-password':
+        checkConfirmPassword();
+        break;
+    }
+  })
+);

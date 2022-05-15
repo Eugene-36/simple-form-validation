@@ -9,19 +9,19 @@
   </head>
   <body>
     <div id="app">
-      <form action="" class="form" id="first-form" data-form>
+      <form action="" class="form" id="first-form" data-form data-all-values>
         <div class="first-form">
           <ul class="list initial-form">
             <li>
               <label for="name">Name: </label>
               <input
                 type="text"
-                id="name"
-                pattern="[a-z]*"
+                id="username"
                 placeholder="Enter the First Name"
                 data-name
-                required
+                autocomplete="off"
               />
+              <small></small>
             </li>
             <li>
               <label for="email">Email: </label>
@@ -31,8 +31,9 @@
                 pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                 placeholder="Enter the Email"
                 data-email
-                required
+                autocomplete="off"
               />
+              <small></small>
             </li>
             <li>
               <label for="password">Password: </label>
@@ -41,8 +42,9 @@
                 id="password"
                 placeholder="Enter the Password"
                 data-password
-                required
+                autocomplete="off"
               />
+              <small></small>
             </li>
             <li>
               <label for="confirm-password">Confirm_Password: </label>
@@ -51,8 +53,9 @@
                 id="confirm-password"
                 placeholder="Confirm password"
                 data-confirm-password
-                required
+                autocomplete="off"
               />
+              <small></small>
             </li>
           </ul>
           <div class="btn-wrapper">
@@ -69,6 +72,7 @@
         class="second-from-hide"
         id="second-form"
         data-second-from
+        data-all-values
       >
         <!--==== Вторая форма с валидацией ==== -->
         <div data-second-form>
@@ -92,6 +96,7 @@
                 <select
                   name="skills"
                   id="skills"
+                  class="skills"
                   disabled
                   data-make-choose
                 ></select>
@@ -105,6 +110,7 @@
                 <select
                   name="hero"
                   id="hero"
+                  class="hero"
                   disabled
                   data-make-choose
                 ></select>
@@ -121,7 +127,13 @@
       </form>
 
       <!-- Третья форма -->
-      <form action="" class="third-from-hide" id="third-form" data-third-form>
+      <form
+        action=""
+        class="third-from-hide"
+        id="third-form"
+        data-third-form
+        data-all-values
+      >
         <div class="first-form">
           <ul class="list initial-form">
             <li>
@@ -131,8 +143,8 @@
                 id="phone-number"
                 placeholder="Enter your phone number"
                 data-number
-                required
               />
+              <small></small>
             </li>
             <li>
               <label for="comments">Leave your comments: </label>
@@ -148,7 +160,7 @@
           <div class="errorMsg" data-errorMsg></div>
           <div class="btn-wrapper">
             <button type="submit" class="btn shead-btn" data-btn-third="3">
-              Send all data
+              Send aplication
             </button>
           </div>
         </div>

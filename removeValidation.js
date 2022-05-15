@@ -1,17 +1,19 @@
-export const removeValidation = function (specificForm) {
-  console.log('specificForm', specificForm);
-  const errors = specificForm.querySelectorAll('.errorMsg');
+// export const removeValidation = function (specificForm) {
+//   const errors = specificForm.querySelectorAll('.errorMsg');
 
-  for (let i = 0; i < errors.length; i++) {
-    errors[i].remove();
-  }
-};
+//   for (let i = 0; i < errors.length; i++) {
+//     console.log('removeValidation[i]', errors[i]);
+//     errors[i].remove();
+//   }
+// };
+
 export const generateError = function (text, form) {
-  let errors = form.querySelectorAll('.errorMsg');
-
-  for (var i = 0; i < errors.length; i++) {
-    errors[i].remove();
-  }
+  // let errors = Array.from(form.querySelectorAll('.errorMsg'));
+  // errors[0];
+  // for (let i = 0; i < errors.length; i++) {
+  //   errors[i]?.remove();
+  //   console.log(' errors[i]', errors);
+  // }
 
   const error = document.createElement('div');
   error.className = 'errorMsg';
