@@ -25,14 +25,14 @@ checkbox.addEventListener('change', (e) => {
 //Добавление имён для первого силекта
 languages.map((item) => {
   let getSecondSelect = makeChoose[0];
-  let singleElemtn = `<option>${item}</option>`;
+  let singleElemtn = `<option value=${item}>${item}</option>`;
   getSecondSelect.insertAdjacentHTML('beforeEnd', singleElemtn);
 });
 
 // Добавление имён для второго селекта
 heroes.map((item) => {
   let getSecondSelect = makeChoose[1];
-  let singleElemtn = `<option>${item}</option>`;
+  let singleElemtn = `<option value=${item}>${item}</option>`;
   getSecondSelect.insertAdjacentHTML('beforeEnd', singleElemtn);
 });
 

@@ -148,7 +148,6 @@ const checkConfirmPassword = () => {
 };
 
 form.addEventListener('submit', function (e) {
-  // prevent the form from submitting
   e.preventDefault();
 
   // validate form

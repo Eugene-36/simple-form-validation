@@ -1,16 +1,16 @@
 export let heroes = [
   'Thanos',
-  'Iron Man',
-  'The Hulk',
-  'Doctor Strange',
+  'Iron-Man',
+  'The-Hulk',
+  'Doctor-Strange',
   'Daredevil',
   'Wolverine',
-  'Black Panther',
+  'Black-Panther',
   'Storm',
-  'Nick Fury',
+  'Nick-Fury',
   'Professor X',
-  'Luke Cage',
-  'Silver Surfer',
+  'Luke-Cage',
+  'Silver-Surfer',
   'Thing',
 ];
 

@@ -64,6 +64,7 @@ body {
 .initial-form > li {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 input {
   border: 1px solid;
@@ -218,6 +219,9 @@ input {
   height: 350px;
   /*! Это потому нужно будет раскомментить  */
   opacity: 0;
+}
+.centering-content {
+  text-align: center;
 }
 .third {
   z-index: 0;

@@ -1,4 +1,3 @@
-import { generateError } from './removeValidation.js';
 import { isRequired, showError, showSuccess, debounce } from './script.js';
 
 //removeValidation
@@ -9,16 +8,29 @@ const form = document.querySelector('[data-third-form]');
 const allForms = document.querySelectorAll(
   '[data-all-values] > div > ul > li > input'
 );
-console.log('allForms', allForms[0]);
+
 //? TextArea
 const texteArea = form.querySelector('.comment-section');
 
 //?Selects
-const skills = document.querySelector('.skills').value;
-const hero = document.querySelector('.hero').value;
+const superPower = document.querySelector('.skills');
+const bestHero = document.querySelector('.hero');
+let skills = '';
+let hero = '';
 
+//Вешаем оброботчик, чтобы взять option
+superPower.addEventListener('change', function () {
+  const getValue = this.value;
+  skills += getValue;
+});
+bestHero.addEventListener('change', function () {
+  const getValue = this.value;
+  hero += getValue;
+
+  console.log('hero', getValue);
+});
 //? Валидация
-// const phoneNumberVal = /^(\+7|8)(\(\d{3}\)|\d{3})\d{7}$/;
+
 let regex =
   /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
 // Valid phone number - 89271238123
@@ -49,17 +61,34 @@ const checkPhoneNumber = () => {
 //Тут получаю value: name , email, password
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  let name = allForms[0]?.value;
-  let email = allForms[1]?.value;
-  let password = allForms[3]?.value;
-  let phoneNumber = allForms[4]?.value;
+
+  let name = allForms[0].value;
+  let email = allForms[1].value;
+  let password = allForms[3].value;
+  let phoneNumber = allForms[4].value;
   let text = texteArea.value;
   let dataObj = { name, email, password, skills, hero, phoneNumber, text };
+
+  console.log('dataObj', dataObj);
 
   let isPhoneValid = checkPhoneNumber();
 
   if (isPhoneValid) {
-    console.log('dataObj', dataObj);
+    fetch('http://localhost:3001/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataObj),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        form.reset();
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
   }
 });
 
