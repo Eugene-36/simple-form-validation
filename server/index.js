@@ -37,7 +37,7 @@ app.post('/create', (req, res) => {
         throw err;
       } else {
         console.log('result', result);
-        res.send({message:'Values inserted....'});
+        res.status(200).json({ status: 200 });
       }
     }
   );

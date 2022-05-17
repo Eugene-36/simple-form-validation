@@ -156,11 +156,6 @@ form.addEventListener('submit', function (e) {
     isPasswordValid = checkPassword(),
     isConfirmPasswordValid = checkConfirmPassword();
 
-  console.log('isUsernameValid', isUsernameValid);
-  console.log('isEmailValid', isEmailValid);
-  console.log('isPasswordValid', isPasswordValid);
-  console.log('isConfirmPasswordValid', isConfirmPasswordValid);
-
   let isFormValid =
     isUsernameValid &&
     isEmailValid &&
@@ -172,9 +167,6 @@ form.addEventListener('submit', function (e) {
     button.classList.remove('shead-btn');
     form.classList.add('moving-first-form');
     secondForm.classList.add('second');
-    //Тут запишу мой объект в локал
-    console.log('Вся валидация прошла успешно');
-    console.log('userData', userData);
   }
 });
 

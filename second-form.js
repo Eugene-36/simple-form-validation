@@ -9,6 +9,8 @@ const nextStepBtn = document.querySelector('[ data-btn-second]');
 //По дефолту делаем кнопку не активной
 nextStepBtn.setAttribute('disabled', 'disabled');
 
+
+
 // И только если свитчер в полежении true тогда, активируем кнопку
 checkbox.addEventListener('change', (e) => {
   makeChoose.map((el) => {

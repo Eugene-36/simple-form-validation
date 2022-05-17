@@ -8,6 +8,45 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- Рзметка для модального окна -->
+    <div id="modal-1" data-modal class="fade-block hidden">
+      <div class="modal-window">
+        <div class="modal">
+          <!-- Header -->
+          <div class="modal__header">
+            <!-- Title -->
+            <p class="text-color">Thank you for filling our application</p>
+            <!-- Close icon sticks to the right -->
+            <box-icon
+              name="window-close"
+              animation="flashing"
+              color="rgba(255,255,255)"
+            ></box-icon>
+          </div>
+
+          <!-- Content -->
+          <p class="text-color">
+            Thank for staying with and suport our service. For get more detailed
+            information click <b>"View all users"</b> button and you will be
+            redirected to new page where you can get all users previously
+            created.
+          </p>
+
+          <!-- Footer -->
+
+          <div class="modal__footer">
+            <button data-modal-close type="button" class="btn btn-dark">
+              Close modal
+            </button>
+            <button data-modal-close type="button" class="btn btn-dark">
+              View all users
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Thank you for filling application -->
+    <!--   To view the created users click the <b>"View all users"</b> button -->
     <div id="app">
       <form action="" class="form" id="first-form" data-form data-all-values>
         <div class="first-form">
@@ -99,11 +138,7 @@
                   class="skills"
                   disabled
                   data-make-choose
-                >
-                  <option value="Choose your best power">
-                    Choose your best power
-                  </option>
-                </select>
+                ></select>
                 <span class="focus"></span>
               </div>
             </li>
@@ -117,11 +152,8 @@
                   class="hero"
                   disabled
                   data-make-choose
-                >
-                  <option value="Select your own hero">
-                    Select your own hero
-                  </option>
-                </select>
+                ></select>
+
                 <span class="focus"></span>
               </div>
             </li>
@@ -167,7 +199,12 @@
           </ul>
           <div class="errorMsg" data-errorMsg></div>
           <div class="btn-wrapper">
-            <button type="submit" class="btn shead-btn" data-btn-third="3">
+            <button
+              type="submit"
+              class="btn shead-btn"
+              data-btn-third="3"
+              data-modal-button="modal-1"
+            >
               Send aplication
             </button>
           </div>
@@ -179,5 +216,6 @@
     <script src="script.js" type="module"></script>
     <script src="second-form.js" type="module"></script>
     <script src="third-form.js" type="module"></script>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
   </body>
 </html>

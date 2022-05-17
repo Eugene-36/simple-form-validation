@@ -1,5 +1,7 @@
 import { isRequired, showError, showSuccess, debounce } from './script.js';
+import { openModal } from './modal.js';
 
+// console.log('openmodal', openModal());
 //removeValidation
 const phoneElement = document.querySelector('[data-number]');
 const btnSend = document.querySelector('[data-btn-third]');
@@ -8,13 +10,16 @@ const form = document.querySelector('[data-third-form]');
 const allForms = document.querySelectorAll(
   '[data-all-values] > div > ul > li > input'
 );
-
 //? TextArea
 const texteArea = form.querySelector('.comment-section');
-
 //?Selects
 const superPower = document.querySelector('.skills');
 const bestHero = document.querySelector('.hero');
+//? Modal data
+const modal = document.querySelector('#modal-1');
+const modalButtonsClose = document.querySelectorAll('[data-modal-close]');
+const allModals = document.querySelectorAll('[data-modal]');
+
 let skills = '';
 let hero = '';
 
@@ -26,8 +31,6 @@ superPower.addEventListener('change', function () {
 bestHero.addEventListener('change', function () {
   const getValue = this.value;
   hero += getValue;
-
-  console.log('hero', getValue);
 });
 //? Валидация
 
@@ -55,7 +58,7 @@ const checkPhoneNumber = () => {
     showSuccess(phoneElement);
     valid = true;
   }
-  return true;
+  return valid;
 };
 
 //Тут получаю value: name , email, password
@@ -69,8 +72,6 @@ form.addEventListener('submit', (e) => {
   let text = texteArea.value;
   let dataObj = { name, email, password, skills, hero, phoneNumber, text };
 
-  console.log('dataObj', dataObj);
-
   let isPhoneValid = checkPhoneNumber();
 
   if (isPhoneValid) {
@@ -83,8 +84,13 @@ form.addEventListener('submit', (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        form.reset();
-        console.log('Success:', data);
+        if (data.status === 200) {
+          form.reset();
+          openModal(modal, modalButtonsClose, allModals);
+
+          console.log('Success:', data);
+          console.log('data.status === 200:', data.status === 200);
+        }
       })
       .catch((error) => {
         console.log('Error:', error);
