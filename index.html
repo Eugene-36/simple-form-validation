@@ -18,7 +18,10 @@
             <p class="text-color">Thank you for filling our application</p>
             <!-- Close icon sticks to the right -->
             <box-icon
+              data-modal-close
+              type="button"
               name="window-close"
+              class="btn-close"
               animation="flashing"
               color="rgba(255,255,255)"
             ></box-icon>
@@ -26,27 +29,23 @@
 
           <!-- Content -->
           <p class="text-color">
-            Thank for staying with and suport our service. For get more detailed
-            information click <b>"View all users"</b> button and you will be
-            redirected to new page where you can get all users previously
-            created.
+            Thank you for staying with us and suport our service. For get more
+            detailed information click
+            <span class="span-text"><b>"View all users"</b></span> button and
+            you will be redirected to new page where you can get all users
+            previously created.
           </p>
 
           <!-- Footer -->
-
           <div class="modal__footer">
             <button data-modal-close type="button" class="btn btn-dark">
-              Close modal
-            </button>
-            <button data-modal-close type="button" class="btn btn-dark">
-              View all users
+              <a href="./allUsers.html"> View all users</a>
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Thank you for filling application -->
-    <!--   To view the created users click the <b>"View all users"</b> button -->
+
     <div id="app">
       <form action="" class="form" id="first-form" data-form data-all-values>
         <div class="first-form">
@@ -199,6 +198,10 @@
           </ul>
           <div class="errorMsg" data-errorMsg></div>
           <div class="btn-wrapper">
+            <button type="button" class="btn shead-btn" data-btn-third="4">
+              Go back to first page
+            </button>
+
             <button
               type="submit"
               class="btn shead-btn"

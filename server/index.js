@@ -26,6 +26,8 @@ app.post('/create', (req, res) => {
   const hero = req.body.hero;
   const text = req.body.text;
 
+  // Store data
+
   let sql =
     'INSERT INTO users (name, email, password, phoneNumber, skills, hero, text) VALUES (?,?,?,?,?,?,?)';
 
@@ -41,6 +43,17 @@ app.post('/create', (req, res) => {
       }
     }
   );
+});
+
+// Get all data
+app.get('/getdata', (req, res) => {
+  let sql = `SELECT * FROM users`;
+  let query = db.query(sql, (err, result) => {
+    if (err) throw err;
+
+    console.log('result', result);
+    res.json({ result });
+  });
 });
 
 app.listen(PORT, () => {
