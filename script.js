@@ -163,6 +163,9 @@ form.addEventListener('submit', function (e) {
     isConfirmPasswordValid;
 
   //submit to the server is the form valid
+  if (form.classList.contains('show-initial-form')) {
+    form.classList.remove('show-initial-form');
+  }
   if (isFormValid) {
     button.classList.remove('shead-btn');
     form.classList.add('moving-first-form');

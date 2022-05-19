@@ -215,21 +215,31 @@ input {
   z-index: 0;
   min-height: 400px;
 }
+/* ! Это чтобы спрятать */
 .third-from-hide {
   opacity: 0;
+  animation: close-last-form 2s forwards;
 }
 .centering-content {
   text-align: center;
 }
+/* ! Это на появление формы */
 .third {
   z-index: 0;
   animation: appear-third-from 2s forwards;
 }
+.show-initial-form {
+  animation: back-first-form 2s forwards;
+}
+
 /* Стили для чекбокса */
 #checkbox {
   /*скрыть чекбокс*/
   /* appearance: none; */
   display: none;
+}
+.hide-third-form {
+  animation: disappear-third-form 2s forwards;
 }
 
 span.custom-switcher {
@@ -482,6 +492,14 @@ select:focus + .focus {
 }
 
 /*? Анимация для форм */
+.hide-third-form {
+  animation: close-last 2s forwards;
+}
+/* .close-last {
+  animation: close-last 2s forwards;
+} */
+/* animation: close-last-form 2s forwards; */
+
 @keyframes form-move {
   0% {
     opacity: 1;
@@ -533,4 +551,50 @@ select:focus + .focus {
   }
 }
 
+@keyframes disappear-third-form {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-345px);
+    pointer-events: none;
+  }
+}
+@keyframes back-first-form {
+  0% {
+    opacity: 0;
+    transform: translateX(-345px);
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+}
+@keyframes close-last {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+    pointer-events: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+}
+@keyframes close-last-form {
+  50% {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 /* appear-third-from */

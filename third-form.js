@@ -4,9 +4,10 @@ import { openModal } from './modal.js';
 // console.log('openmodal', openModal());
 //removeValidation
 const phoneElement = document.querySelector('[data-number]');
-const btnSend = document.querySelector('[data-btn-third]');
+const btnBack = document.querySelector('[data-btn-four]');
 const form = document.querySelector('[data-third-form]');
-
+const firstForm = document.querySelector('[data-form]');
+const firstBtn = document.querySelector('[data-btn]');
 const allForms = document.querySelectorAll(
   '[data-all-values] > div > ul > li > input'
 );
@@ -96,6 +97,20 @@ form.addEventListener('submit', (e) => {
         console.log('Error:', error);
       });
   }
+});
+
+// Надо удалить third и добавить hide-third-form,
+//  также удалить класс скрытия из первой формы
+// удалить у первой формы класс moving-first-form
+
+btnBack.addEventListener('click', () => {
+  form.classList.remove('third');
+  form.style.opacity = '1';
+  firstForm.classList.add('show-initial-form');
+
+  firstForm.classList.remove('moving-first-form');
+
+  // firstForm.classList.add('moving-second-form');
 });
 
 form.addEventListener(
