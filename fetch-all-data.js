@@ -29,22 +29,13 @@ function fetchData() {
         />
       </div>
       <div class='info'>
-        <label for='Name'>Id: ${id}</label>
-        <p class='person-info'>2022</p>
-        <label class='space' for='Name'>
-          Name:
-        </label>
-        <p class='person-info'>${name}</p>
-        <label for='Name'>Email:</label>
-        <p class='person-info'>${email}</p>
-        <label for='Name'>Hero:</label>
-        <p class='person-info'>${hero}</p>
-        <label for='Name'>Skills:</label>
-        <p class='person-info'>${skills}</p>
-        <label for='Name'>Phone:</label>
-        <p class='person-info'>${phoneNumber}</p>
-        <label for='Name'>Comments:</label>
-        <p class='person-info'>${
+        <label for='Name'>Id: ${id}</label>     
+        <p class='person-info'><span class="head-color">Name:</span>${name}</p>
+        <p class='person-info'><span class="head-color">Email:</span>${email}</p>
+        <p class='person-info'><span class="head-color">Hero:</span>${hero}</p>
+        <p class='person-info'><span class="head-color">Skills:</span>${skills}</p>
+        <p class='person-info'><span class="head-color">Phone:</span>${phoneNumber}</p>
+        <p class='person-info'><span class="head-color">Comment:</span>${
           text ? text : 'Client did not leave comment'
         }</p>
       </div>

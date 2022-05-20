@@ -1,13 +1,10 @@
 import { isRequired, showError, showSuccess, debounce } from './script.js';
 import { openModal } from './modal.js';
 
-// console.log('openmodal', openModal());
-//removeValidation
 const phoneElement = document.querySelector('[data-number]');
 const btnBack = document.querySelector('[data-btn-four]');
 const form = document.querySelector('[data-third-form]');
 const firstForm = document.querySelector('[data-form]');
-const firstBtn = document.querySelector('[data-btn]');
 const allForms = document.querySelectorAll(
   '[data-all-values] > div > ul > li > input'
 );
@@ -37,7 +34,6 @@ bestHero.addEventListener('change', function () {
 
 let regex =
   /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-// Valid phone number - 89271238123
 
 const isPhoneNumber = (phonenumber) => {
   const re = new RegExp(regex);
@@ -99,18 +95,12 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// Надо удалить third и добавить hide-third-form,
-//  также удалить класс скрытия из первой формы
-// удалить у первой формы класс moving-first-form
-
 btnBack.addEventListener('click', () => {
   form.classList.remove('third');
   form.style.opacity = '1';
   firstForm.classList.add('show-initial-form');
 
   firstForm.classList.remove('moving-first-form');
-
-  // firstForm.classList.add('moving-second-form');
 });
 
 form.addEventListener(

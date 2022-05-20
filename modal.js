@@ -1,8 +1,4 @@
 export function openModal(modal, modalButtonsClose, allModals) {
-  // console.log('modalButtons', modalButtons);
-  // console.log('modalButtonsClose', modalButtonsClose);
-  // console.log('allModals', allModals);
-
   //Открываем модальное окно
   modal.classList.remove('hidden');
 
