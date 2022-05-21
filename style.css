@@ -34,6 +34,9 @@ a {
   text-decoration: none;
   color: white;
 }
+textarea {
+  resize: none;
+}
 .form {
   position: relative;
   border: 1px solid;
