@@ -51,7 +51,7 @@ app.get('/getdata', (req, res) => {
   let query = db.query(sql, (err, result) => {
     if (err) throw err;
 
-    console.log('result', result);
+    
     res.json({ result });
   });
 });
