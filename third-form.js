@@ -30,8 +30,8 @@ bestHero.addEventListener('change', function () {
   const getValue = this.value;
   hero += getValue;
 });
-//? Валидация
 
+//? Валидация
 let regex =
   /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
 
@@ -99,7 +99,6 @@ btnBack.addEventListener('click', () => {
   form.classList.remove('third');
   form.style.opacity = '1';
   firstForm.classList.add('show-initial-form');
-
   firstForm.classList.remove('moving-first-form');
 });
 

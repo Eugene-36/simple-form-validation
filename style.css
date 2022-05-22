@@ -19,17 +19,6 @@ body {
   --select-arrow: var(--select-border);
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 a {
   text-decoration: none;
   color: white;
@@ -43,9 +32,6 @@ textarea {
   padding: 30px;
   box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
   z-index: 2;
-
-  /*! Это потом нужно будет удалить  */
-  /* display: none; */
 }
 
 .moving-first-form {
@@ -150,17 +136,6 @@ input {
   margin-top: 10px;
   text-align: center;
 }
-@keyframes shake {
-  25% {
-    transform: translateX(4px);
-  }
-  50% {
-    transform: translateX(-4px);
-  }
-  75% {
-    transform: translateX(4px);
-  }
-}
 
 .errorMsg {
   text-align: center;
@@ -176,8 +151,8 @@ input {
 
 .second-form {
   position: absolute;
-  top: 50%; /* position the top  edge of the element at the middle of the parent */
-  left: 50%; /* position the left edge of the element at the middle of the parent */
+  top: 50%;
+  left: 50%;
   box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
   padding: 0.8rem;
   transform: translate(-50%, -50%);
@@ -187,7 +162,7 @@ input {
   box-shadow: inset 0 0 0 200px rgb(0 0 0 / 78%);
   padding: 1.5rem;
   height: 400px;
-  /*! Это потому нужно будет раскомментить  */
+
   opacity: 0;
 }
 .second {
@@ -208,7 +183,6 @@ input {
 }
 
 /* Стили для третьей формы  */
-
 #third-form {
   position: absolute;
 
@@ -218,7 +192,7 @@ input {
   z-index: 0;
   min-height: 400px;
 }
-/* ! Это чтобы спрятать */
+
 .third-from-hide {
   opacity: 0;
   animation: close-last-form 2s forwards;
@@ -226,7 +200,7 @@ input {
 .centering-content {
   text-align: center;
 }
-/* ! Это на появление формы */
+
 .third {
   z-index: 0;
   animation: appear-third-from 2s forwards;
@@ -234,11 +208,12 @@ input {
 .show-initial-form {
   animation: back-first-form 2s forwards;
 }
+.hide-third-form {
+  animation: close-last 2s forwards;
+}
 
 /* Стили для чекбокса */
 #checkbox {
-  /*скрыть чекбокс*/
-  /* appearance: none; */
   display: none;
 }
 .hide-third-form {
@@ -249,8 +224,8 @@ span.custom-switcher {
   position: absolute;
   width: 73px;
   height: 28px;
-  left: 40%;
-  top: 18%;
+  left: 35%;
+  top: 16%;
   border-radius: 80px;
   background: #fe0000;
   transition: 0.5s;
@@ -269,15 +244,15 @@ span.custom-switcher {
   cursor: pointer;
 }
 input:checked + span {
-  background: #05be05; /*цвет отмеченного чекбокса*/
-  box-shadow: 0 15px 25px #05be0566; /*тень*/
+  background: #05be05;
+  box-shadow: 0 15px 25px #05be0566;
 }
 input:checked + span i .eyes-switcher {
-  background: #05be05; /*цвет отмеченного чекбокса*/
-  box-shadow: 0 15px 25px #05be0566; /*тень*/
+  background: #05be05;
+  box-shadow: 0 15px 25px #05be0566;
 }
 input:checked + span i {
-  left: 45px; /*сдвиг круга*/
+  left: 45px;
 }
 
 .eyes-switcher {
@@ -420,7 +395,6 @@ select:focus + .focus {
 }
 
 .modal {
-  /* Border */
   border: 1px solid rgba(255, 255, 255);
   border-radius: 4px;
   width: 350px;
@@ -457,7 +431,7 @@ select:focus + .focus {
 }
 
 /*? Медиа правила  */
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 320px) {
   .form {
     width: 250px;
     padding: 15px;
@@ -472,6 +446,12 @@ select:focus + .focus {
 
   .list > li label {
     font-size: 0.8rem;
+  }
+  #third-form {
+    width: 250px;
+  }
+  textarea {
+    width: 200px;
   }
 }
 
@@ -490,19 +470,62 @@ select:focus + .focus {
   .footer__content {
     grid-template-columns: repeat(3, max-content);
   }
+
+  .form {
+    width: 300px;
+    padding: 15px;
+  }
+  .list > li input {
+    width: 250px;
+  }
+
+  .list > li input::placeholder {
+    font-size: 0.8rem;
+  }
+
+  .list > li label {
+    font-size: 0.8rem;
+  }
+
+  #third-form {
+    width: 300px;
+  }
+  textarea {
+    width: 250px;
+  }
 }
 @media screen and (min-width: 767px) {
+  #third-form {
+    width: 350px;
+  }
+  textarea {
+    width: 300px;
+  }
 }
 
 /*? Анимация для форм */
-.hide-third-form {
-  animation: close-last 2s forwards;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-/* .close-last {
-  animation: close-last 2s forwards;
-} */
-/* animation: close-last-form 2s forwards; */
-
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
 @keyframes form-move {
   0% {
     opacity: 1;
@@ -600,4 +623,3 @@ select:focus + .focus {
     opacity: 0;
   }
 }
-/* appear-third-from */

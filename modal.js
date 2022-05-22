@@ -8,7 +8,6 @@ export function openModal(modal, modalButtonsClose, allModals) {
       const modalIdClose = e.target
         .closest('[data-modal]')
         .classList.add('hidden');
-      //console.log('modalIdClose', modalIdClose);
     });
   });
 

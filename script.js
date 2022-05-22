@@ -1,5 +1,4 @@
 const form = document.querySelector('[data-form]');
-
 const secondForm = document.querySelector('[data-second-from]');
 
 //! Все поля и кнопка
@@ -7,10 +6,7 @@ const userName = document.querySelector('[data-name]');
 const email = document.querySelector('[data-email]');
 const password = document.querySelector('[data-password]');
 const confirmPassword = document.querySelector('[data-confirm-password]');
-
 const button = document.querySelector('[data-btn]');
-
-//! Новая версия валидации формы
 
 //? Функции хэлперы
 
@@ -178,7 +174,6 @@ export const debounce = (fn, delay = 500) => {
 
   return (...args) => {
     //Удаляем предыдущий таймер
-
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
